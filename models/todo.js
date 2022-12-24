@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate() {
+      // define association here
     }
 
     static addTodo({title, dueDate}) {
@@ -67,10 +68,6 @@ module.exports = (sequelize, DataTypes) => {
     }
     setCompletionStatus(receiver) {
       return this.update({ completed: receiver });
-    }
-
-    markAsCompleted() {
-      return this.update({completed: true});
     }
     
   }
