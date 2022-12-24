@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "rahul",
-    "password": "gupta",
+    "password": "gupta01",
     "database": "wd-todo-dev",
     "host": "127.0.0.1",
     "dialect": "rahul"
   },
   "test": {
     "username": "rahul",
-    "password": "gupta",
+    "password": "gupta01",
     "database": "wd-todo-test",
     "host": "127.0.0.1",
     "dialect": "rahul"
