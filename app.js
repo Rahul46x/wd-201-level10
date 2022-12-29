@@ -16,8 +16,10 @@ app.use(cookieParser('ssh!!!! some secret string'));
 app.use(csrf('this_should_be_32_character_long', ['POST', 'PUT', 'DELETE']));
 
 
-// seting the ejs is the engine
+
+
 app.set('view engine', 'ejs');
+
 
 app.get('/', async (request, response)=>{
   const allTodos = await Todo.getTodos();
@@ -30,7 +32,9 @@ app.get('/', async (request, response)=>{
       allTodos, overdue, dueToday, dueLater, completedItems,
       csrfToken: request.csrfToken(),
     });
-  } else {
+  } 
+  
+  else {
     response.json({allTodos, overdue, dueToday, dueLater});
   }
 });
@@ -40,14 +44,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/todos', (request, response)=>{
   console.log('Todo List', request.body);
 });
+
+
 app.post('/todos', async (request, response)=>{
   console.log('Todo List');
+  
   try {
     console.log('entering in try block');
     const todo =await Todo.addTodo({
       title: request.body.title, dueDate: request.body.dueDate,
     });
-    return response.redirect('/');
+    return response.Redirect('/');
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
@@ -66,12 +73,7 @@ app.put('/todos/:id', async (request, response) => {
 
 app.delete('/todos/:id', async function(request, response) {
   console.log('We have to delete a Todo with ID: ', request.params.id);
-  // FILL IN YOUR CODE HERE
-
-  // First, we have to query our database to delete a Todo by ID.
-  // eslint-disable-next-line max-len
-  // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
-  // response.send(true)
+  
   const deleteFlag = await Todo.destroy({where: {id: request.params.id}});
   response.send(deleteFlag ? true : false);
 });
