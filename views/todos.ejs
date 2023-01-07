@@ -51,14 +51,20 @@
 </head>
 <body>
     <div class="grid grid-cols-6">
+        <div class="col-start-5 p-6">
+            <a class='text-red-700 rounded-full border-2 p-2 bg-blue-700 text-white' href="/signout">signout</a>
+        </div>
+    </div>
+    <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
             <%- include('header.ejs') %>
-            <a href="/signout">signout</a>
+            <h1><%= "Welcome, " + user.firstName + " " + user.lastName %></h1>
+            
             <form action="/todos" method="post">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                 <div class="flex gap-2 py-4">
                     <div class="flex-auto">
-                        <input type="text" name="title" placeholder="what types next?" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required/>
+                        <input type="text" name="title" placeholder="whats next?" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required/>
                     </div>
                 
                     <div class="flex-auto">
@@ -72,8 +78,7 @@
                 </div>
                 
                
-           
-           
+                
             </form>
             <div>
                 <%- include('todo.ejs', {title: "Overdue", data: overdue}) %>
@@ -82,7 +87,6 @@
                 <%- include('todo.ejs', {title: "Completed Items", data: completedItems}) %>
             </div>
            
-            
             
             <!-- <%- include('footer.ejs') %> -->
         </div>
