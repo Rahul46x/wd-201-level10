@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const {request, response} = require('express');
 const express = require('express');
+
 const app = express();
 const csrf = require('tiny-csrf');
 
@@ -19,15 +20,12 @@ const saltRounds = 10;
 
 const flash = require('connect-flash');
 
-
 app.use(express.urlencoded({extended: false}));
 const path = require('path');
 
 app.set('views',path.join(__dirname,'views'));
 app.use(flash());
 const user = require('./models/user');
-
-
 
 app.use(bodyParser.json());
 app.use(cookieParser('ssh!!!! some secret string'));
@@ -89,6 +87,7 @@ passport.deserializeUser((id,done) => {
     done(error, null)
   })
 })
+
 // seting the ejs is the engine
 app.set('view engine', 'ejs');
 
@@ -130,6 +129,7 @@ app.get('/signup',(request,response)=>{
     title: 'Sign Up',
     csrfToken: request.csrfToken(),
   });
+  
 });
 
 app.post('/users',async (request,response)=>{
@@ -151,6 +151,7 @@ app.post('/users',async (request,response)=>{
   
   const hashedPwd =await bcyrpt.hash(request.body.password, saltRounds);
   console.log(hashedPwd);
+  
   try{
     const user = await User.create({
       firstName: request.body.firstName,
@@ -172,7 +173,6 @@ app.post('/users',async (request,response)=>{
     request.flash("error", error.errors[0].message);
     response.redirect("/signup");
   }
-  
   //console.log("First Name:",request.body.firstName)
 });
 
@@ -181,6 +181,7 @@ app.get('/login',(request,response)=>{
     title:"Login",
     csrfToken: request.csrfToken(),
   });
+  
 });
 
 app.post('/session',passport.authenticate('local',{
@@ -240,7 +241,9 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
   // FILL IN YOUR CODE HERE
 
   // First, we have to query our database to delete a Todo by ID.
+ 
   // eslint-disable-next-line max-len
+  
   // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
   // response.send(true)
   
@@ -252,6 +255,7 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
   else{
     response.send(true);
   }
+
 });
 
 module.exports = app;
