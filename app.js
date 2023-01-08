@@ -6,7 +6,6 @@ const app = express();
 const csrf = require('tiny-csrf');
 
 const {Todo, User} = require('./models');
-
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
